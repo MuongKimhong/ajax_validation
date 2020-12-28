@@ -1,0 +1,31 @@
+[metadata]
+name = ajax_validation
+version = 1.0
+description = A package used to return django form's validation errors without refreshing the page
+long_description = file: README.rst
+url = https://github.com/MuongKimhong/ajax_validation
+author = Muong Kimhong
+author_email = muongkimhong086@gmail.com
+license = MIT License
+classifiers =
+    Environment :: Web Environment
+    Framework :: Django
+    Framework :: Django :: 3.0
+    Framework :: Django :: 3.1
+    Intended Audience :: Developers
+    License :: OSI Approved :: MIT License
+    Operating System :: OS Independent
+    Programming Language :: Python
+    Programming Language :: Python :: 3
+    Programming Language :: Python :: 3 :: Only
+    Programming Language :: Python :: 3.5
+    Programming Language :: Python :: 3.6
+    Programming Language :: Python :: 3.7
+    Programming Language :: Python :: 3.8
+    Programming Language :: Python :: 3.9
+    Topic :: Internet :: WWW/HTTP
+    Topic :: Internet :: WWW/HTTP :: Dynamic Content
+
+[options]
+include_package_data = true
+packages = find:

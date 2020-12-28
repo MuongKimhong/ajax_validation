@@ -1,0 +1,52 @@
+<section>
+  <h2 id="url-hidden" hidden>{{url}}</h2>
+  <h2 id="form_id-hidden" hidden>{{form_id}}</h2>
+
+  {% for field in fields %}
+  <script-field id="{{field}}" hidden>{{field}}</script-field>
+  {% endfor %}
+
+  <script type="text/javascript">
+    let input = {}, errorFields = [];
+    let url = $("#url-hidden").val();
+    let tags = document.getElementsByTagName("script-field");
+    let token = $("{{form_id}}").find("input[name=csrfmiddlewaretoken]").val();
+    
+    for (let j = 0; j < tags.length; j++) {
+      errorFields[j] = tags[j].id
+    }
+
+    errorFields.forEach(function(value) {
+      $("#" + value + "_error").hide();
+    });
+    
+    $("{{form_id}}").submit(function (e) {
+      e.preventDefault();
+      for (let i = 0; i < tags.length; i++) {
+        input[tags[i].id] = $("#id_" + tags[i].id).val();
+      }
+      input["csrfmiddlewaretoken"] = token;
+
+      $.ajax({
+        type: "POST",
+        url: url,
+        data: input,
+        success: function (response) {
+          eval(response)
+        },
+        error: function (response) {
+          var errorResult = response["responseJSON"]["form_errors"];
+          for (var key in errorResult) {
+            if (errorResult.hasOwnProperty(key)) {
+              errorFields.forEach(function (value) {
+                if (String(key) == value) {
+                  $("#" + value + "_error").text(errorResult[key][0]).fadeIn().delay(4000).fadeOut();
+                }
+              });
+            }
+          }
+        },
+      });
+    });
+  </script>
+</section>
