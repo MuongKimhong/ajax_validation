@@ -35,7 +35,7 @@ TEMPLATES = [
     },
 ]
 ```
-and your html page (test.html) not the layout
+include this in your html page where you form (example below)
 ```
 {% include "ajax_validation/ajax_script.html" %} <---- include this in your html and make sure it's under jquery
 ```
@@ -64,7 +64,7 @@ class TestForm(forms.Form):
             raise forms.ValidationError("Sorry you're under 18")
         return age    
 ```
-In views.py, import **context_processor** from ajax_validation package
+In views.py, import `context_processor` from ajax_validation package
 ```python
 # views.py
 from django.http import JsonResponse
@@ -97,7 +97,7 @@ def test_view(request):
     
     return render(request, 'your_app/test.html', {'form': form})
 ```
-**success_code** is the javascript code that will be executed if the request is successful. In this case, it will alert a message. If you want to do something related to url like changing the url to new page like:
+`success_code` is the javascript code that will be executed if the request is successful. In this case, it will alert a message. If you want to do something related to url like changing the url to new page like:
 ```python
 success_code = '''
     window.location = "{% url 'about' %}"
@@ -117,9 +117,9 @@ In test.html
     <form action="{% url 'test' %}" id="my-form" method="POST">
       {% csrf_token %}
       {{form.name}}
-      {{name_error}} <---- error response for name
+      <small>{{name_error}}</small> <---- error response for name
       {{form.age}}
-      {{age_error}} <---- error response for age
+      <small>{{age_error}}</small>  <---- error response for age
       <button type="submit">submit</button>
     </form>
     
@@ -127,7 +127,6 @@ In test.html
 </body>
 ```
 `{{name_error}}` and `{{age_error}}` are the error texts that will be displayed in html if we get error responses. 
+###### Syntax for it is `{{<field>_error}}`
 
-**Syntax for it is `{{<field>_error}}`**
-
-By default, `{{<field>_error}}` will be rendered as `<p id="<field>_error"><p>` and will be fade out after 4 seconds.
+By default, `{{<field>_error}}` will be rendered as `<p id="<field>_error"><p>` and will be faded out after 4 seconds.
