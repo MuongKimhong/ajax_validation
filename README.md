@@ -1,5 +1,5 @@
 # ajax_validation
-**ajax_validation** is a django third party that can turn a POST request into an AJAX request and display Django form's validation errors in HTML template without refreshing the page and reduces amount of javascript code that developers need to write.
+**ajax_validation** is a django package that can turn a POST request into an AJAX request and display Django form's validation errors in HTML template without refreshing the page and reduces amount of javascript code that developers need to write.
 
 **Tested with:**
 ```bash
