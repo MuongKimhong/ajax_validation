@@ -16,7 +16,6 @@ after the installation add it to your **settings.py**
 INSTALLED_APPS = [
     'your_app.apps.YourAppConfig',   
     'ajax_validation', # <----- add this
-    
     'django.contrib.admin',
 ]
 
@@ -54,8 +53,10 @@ class TestForm(forms.Form):
         
     def clean_name(self):
         name = self.cleaned_data['name']
+
         if name != "richard":
             raise forms.ValidationError("Sorry wrong name")
+            
         return name
         
     def clean_age(self):
